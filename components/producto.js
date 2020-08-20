@@ -81,7 +81,7 @@ let producto = {
             <div class="pagination-element">
                 <ul class="pagination pagination-sm">
                     <li class="page-item"  v-if="page != 1"><a class="page-link" href="#"  @click="page--" disabled><</a></li>
-                    <li class="page-item" v-for="pageNumber in pages"><a class="page-link" :class="page==pageNumber?'active':''" href="#" @click="page = pageNumber">{{pageNumber}}</a></li>
+                    <li class="page-item" v-for="pageNumber in pages" v-if="pageNumber > (page-2) && pageNumber < (page+2)"><a class="page-link" :class="page==pageNumber?'active':''" href="#" @click="page = pageNumber">{{pageNumber}}</a></li>
                     <li class="page-item"  v-if="page < pages.length"><a class="page-link" href="#"  @click="page++">></a></li>
                 </ul>
             </div>
