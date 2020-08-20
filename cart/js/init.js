@@ -2,7 +2,7 @@
  * Area para testing comentar en prodduction
  */
 /*$(document).ready(function(){
-    content.init("testing","1",'{"nombre":"Ivan Villegas rojas","correo":"villegas.rojas.ivan@gmail.com","telefono":"2211620123","postal_code":"90796","_cartCollection":{"data":[{"cp":"90796","idProBodPre":"5","idCaracteristica":"13","cantidad":"3"},{"cp":"90796","idProBodPre":"6","idCaracteristica":"16","cantidad":"1"}]}}')
+    content.init("testing","1",'{"nombre":"Ivan Villegas rojas","correo":"villegas.rojas.ivan@gmail.com","telefono":"2211620123","postal_code":"90796","_cartCollection":{"data":[{"cp":"90796","idProBodPre":"5","idCaracteristica":"13","cantidad":"1"},{"cp":"90796","idProBodPre":"6","idCaracteristica":"16","cantidad":"1"}]}}')
 });*/
 
 
@@ -55,6 +55,7 @@ let content = new Vue({
         },
         redirectPayment(idPayment){
             if(idPayment!=""){
+                //Esto lo hago para redireccionar el pedido, activarlo y validarlo
                 window.location.replace("../payment?id="+idPayment+"&use_mode="+this.initialize.use_mode);
             }
         },
@@ -67,14 +68,15 @@ let content = new Vue({
         onChangeTotal(total){
             let tempCardCobro = this.$refs['productosInCart'].$refs['card-cobro'];
             if(tempCardCobro.envio){
-                if(!tempCardCobro.isSendFree){
-                    this.total = total;
-                }else{
+                if(tempCardCobro.$props.limiteEnvio > total){
                     this.total = total + tempCardCobro.costoEnvio;
+                }else{
+                    this.total = total;
                 }
             }else{
                 this.total = total;
             }
+            
         },
         standarLocation(formSubmit){
             return "Calle: " +formSubmit.data.input_calle.value+" #Int: "+formSubmit.data.input_no_int.value+" #Ext: "+formSubmit.data.input_no_ext.value+" Municipio: "+this.locations[0].D_mnpio+" Ciudad: "+this.locations[0].d_ciudad+" Estado: "+this.locations[0].d_estado;
@@ -88,9 +90,7 @@ let content = new Vue({
             });
             let form = new FormData();
             form.append('idProBodPre', JSON.stringify(tempProductos));
-            axios.post(service,
-                form
-            ).then(function (response) {
+            axios.post(service,form).then(function (response) {
                 //cachamos informacion 
                 content.productos = response.data;
                 //this.setProductos(response.data);

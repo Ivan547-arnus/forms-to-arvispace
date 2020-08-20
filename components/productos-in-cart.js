@@ -42,6 +42,7 @@ let productosInCart = {
                 }
                 this.total = tempTotal;
                 this.cantidad = tempCantidad;
+                this.$emit("on-change-total",this.total);
             }catch(e){
                 console.log("Error por que se monto antes de iniciar variables.");
             }
@@ -95,7 +96,6 @@ let productosInCart = {
                 </div>
             </div>
             <card-cobro
-                envio
                 :limiteEnvio="10000"
                 :costoEnvio="500"
                 :total="total"
