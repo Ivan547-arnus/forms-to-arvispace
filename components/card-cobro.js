@@ -74,6 +74,7 @@ let cardCobro = {
     },
     template:`
         <div class="navbar fixed-bottom">
+            <p class="label-card-cobro" v-if="envio && !isSendFree"><b>Costo por envio:</b> <label>{{getTotalEnvio | toCurrency}}</label></p>
             <p class="label-card-cobro" v-if="envio && isSendFree"><b>Costo por envio:</b> <label>{{getTotalEnvio}}</label></p>
             <p class="label-card-cobro"><b>Cantidad de productos:</b> <label>{{cantidad}}</label></p>
             <p class="label-card-cobro"><b>Total:</b> <label>{{dataTotal | toCurrency}}</label></p>
