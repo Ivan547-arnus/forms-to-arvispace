@@ -25,8 +25,10 @@ let payment = {
     },
     filters:{
         status(value){
-            if(value=="completed"){
-                return "¡Pedido exitoso!"
+            if(value == "completed"){
+                return "¡Pedido exitoso!";
+            }else{
+                return "¡Error al hacer el pedido!";
             }
         },
         toCurrency(val){
