@@ -260,9 +260,9 @@ let content = new Vue({
                     
                     console.log(response.data);
                     if(response.data.metodo == 1){//success pedido
-                        window.location.replace(responseBank.url);
+                        content.timerToOrder(responseBank);
+                        //window.location.replace(responseBank.url);
                     }else{
-
                         createAviso("Error inesperado intentelo nuevamente");
                         formSubmit.buttons.content = "Confirmar compra";
                         formSubmit.buttons.disabled = false;
@@ -274,7 +274,6 @@ let content = new Vue({
                 formSubmit.buttons.disabled = false;
                 console.log(e);
             });
-
         },
         timerToOrder(responseBank){
             /**
@@ -286,7 +285,7 @@ let content = new Vue({
             form.append('idBanco',responseBank.id);
 
             axios.post(service, form).then(function(response){
-
+                console.log(response);
             }).catch(function(e){
                 console.log(e);
             });
