@@ -145,8 +145,10 @@ let content = new Vue({
             form.append('arregloProductos',JSON.stringify(toValidateExisting));
             //consumimos servicio
             let service = this.initialize.use_mode == "testing" ? "https://arvispace.com/serviciosASARAmbientePruebas/validaExistencias.php" : "https://arvispace.com/serviciosASAR/validaExistencias.php"; 
+            formSubmit.buttons.content = "Validando exitencias...";
             axios.post(service, form).then(function(response){
                 if(response.status == 200){ //validat if request is success
+                    console.log(response.data);
                     if(response.data[0].metodo==1){
                         /**
                          * Hay existencias
@@ -157,10 +159,13 @@ let content = new Vue({
                         /**
                          * No hay existencias
                          */
+                        createAviso("No podemos surtir el pedido debido a la falta de productos.");
                     }
                 }
             }).catch(function(e){
-                console.log(e);
+                createAviso(e);
+                formSubmit.buttons.content = "Confirmar compra";
+                formSubmit.buttons.disabled = false;
             });
         },
         createPayOrder(formSubmit){
@@ -184,15 +189,22 @@ let content = new Vue({
 
             let service = this.initialize.use_mode == "testing" ? "https://arvispace.com/lib/paymenttesting/pay.php":"https://arvispace.com/lib/payment/pay.php";
 
+            formSubmit.buttons.content = "Creando orden...";
             axios.post(service,form).then(function(response){
                 if(response.status == 200){
                     if(response.data.status == "charge_pending"){
                         content.insertOrder(response.data,formSubmit)
                     }else{
-
+                        createAviso(response.data);
+                        formSubmit.buttons.content = "Confirmar compra";
+                        formSubmit.buttons.disabled = false;
                     }
                 }
             }).catch(function(e){
+                
+                createAviso(e);
+                formSubmit.buttons.content = "Confirmar compra";
+                formSubmit.buttons.disabled = false;
                 console.log(e);
             });
         },
@@ -241,21 +253,33 @@ let content = new Vue({
             form.append('MetodoPag', 'Tarjeta');
             form.append('idBanco', responseBank.id);
 
+            formSubmit.buttons.content = "Agregando productos...";
             axios.post(service,form).then(function(response){
                 if(response.status == 200){
                     //success request
+                    
+                    console.log(response.data);
                     if(response.data.metodo == 1){//success pedido
-                        content.timerToOrder(responseBank)
+                        window.location.replace(responseBank.url);
                     }else{
 
+                        createAviso("Error inesperado intentelo nuevamente");
+                        formSubmit.buttons.content = "Confirmar compra";
+                        formSubmit.buttons.disabled = false;
                     }
                 }
             }).catch(function(e){
+                createAviso(e);
+                formSubmit.buttons.content = "Confirmar compra";
+                formSubmit.buttons.disabled = false;
                 console.log(e);
             });
 
         },
         timerToOrder(responseBank){
+            /**
+             *  Desactivado por un momento para implementar schedule en servidor
+             */
             let form = new FormData();
             let service = this.initialize.use_mode == "testing" ? "https://arvispace.com/serviciosASARAmbientePruebas/tiempos.php" : "https://arvispace.com/serviciosASAR/tiempos.php";
             form.append('correo',this.initialize.data.correo);
