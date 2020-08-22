@@ -260,7 +260,7 @@ let content = new Vue({
                     
                     console.log(response.data);
                     if(response.data.metodo == 1){//success pedido
-                        content.timerToOrder(responseBank);
+                        window.location.replace(responseBank.url);
                         //window.location.replace(responseBank.url);
                     }else{
                         createAviso("Error inesperado intentelo nuevamente");
@@ -274,11 +274,11 @@ let content = new Vue({
                 formSubmit.buttons.disabled = false;
                 console.log(e);
             });
-        },
+        },/*
         timerToOrder(responseBank){
             /**
-             *  Desactivado por un momento para implementar schedule en servidor
-             */
+             *  Ya funciona el schedule
+             *
             let form = new FormData();
             let service = this.initialize.use_mode == "testing" ? "https://arvispace.com/serviciosASARAmbientePruebas/tiempos.php" : "https://arvispace.com/serviciosASAR/tiempos.php";
             form.append('correo',this.initialize.data.correo);
@@ -289,7 +289,6 @@ let content = new Vue({
             }).catch(function(e){
                 console.log(e);
             });
-            window.location.replace(responseBank.url);
-        }
+        }*/
     }
 });
