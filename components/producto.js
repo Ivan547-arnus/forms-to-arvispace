@@ -55,6 +55,9 @@ let producto = {
         },
         page(){
             //alert(this.page);
+        },
+        productos(){
+            this.page = 1;
         }
 	},
     template:`
