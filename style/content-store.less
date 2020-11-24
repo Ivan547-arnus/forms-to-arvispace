@@ -506,6 +506,43 @@
         }
     }
 
+    .load-store{
+        z-index: 3500;
+        background: #fff;
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .lds-dual-ring {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+        }
+        .lds-dual-ring:after {
+            content: " ";
+            display: block;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 2px solid #0f0f19;
+            border-color: #0f0f19 transparent #0f0f19 transparent;
+            animation: lds-dual-ring 1.2s linear infinite;
+        }
+        @keyframes lds-dual-ring {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+        }
+          
+    }
+
 
     /**Animations
     */
@@ -536,6 +573,16 @@
         opacity: 0;
     }
 
+    .show-load-container-enter-active {
+        transition: all .3s ease;
+    }
+    .show-load-container-leave-active {
+        transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .show-load-container-enter, .show-load-container-leave-to{
+        opacity: 0;
+    }
+
     .show-brand-container-enter-active {
         transition: all .3s ease;
     }
@@ -543,8 +590,10 @@
         transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
     }
     .show-brand-container-enter, .show-brand-container-leave-to{
-        opacity: 0;
+        transform: translateY(100%);
     }
+
+
 }
 
 

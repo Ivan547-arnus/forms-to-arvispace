@@ -40,14 +40,14 @@ let brands = {
                     /* right swipe */
                 }                       
             } else {
-                if ( this.yDiff > 125 ) {
+                if ( this.yDiff > 80 ) {
                     /* up swipe */ 
                     if(this.selectedIndex - 1 < 0){
                         this.selectedIndex = this.$props.info.length -1;
                     }else{
                         this.selectedIndex--;
                     }
-                } else if(this.yDiff < -125){ 
+                } else if(this.yDiff < -80){ 
                     /* down swipe */
                     
                     if(this.selectedIndex + 1 == this.$props.info.length){
@@ -98,22 +98,24 @@ let brands = {
         }
     },
     template:`
-        <div v-if="isActive" class="brand-container">
-            <div class='wrapper'>
-                <div class='carousel'>
-                    <div class='carousel__item' :class="calculateClass(index)" v-for="(brand, index) in info">
-                        <div class="card">
-                            <div class="card-body">
-                                <img :src="brand.foto" class="img-fluid" @click="onClickBrand(brand.idEmpresa, index)">
-                            </div>
-                            <div class="card-footer">
-                                {{brand.nombreEmpresa}}
+        <transition name="show-brand-container">
+            <div v-if="isActive" class="brand-container">
+                <div class='wrapper'>
+                    <div class='carousel'>
+                        <div class='carousel__item' :class="calculateClass(index)" v-for="(brand, index) in info">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img :src="brand.foto" class="img-fluid" @click="onClickBrand(brand.idEmpresa, index)">
+                                </div>
+                                <div class="card-footer">
+                                    {{brand.nombreEmpresa}}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>    
+                    </div>    
+                </div>
             </div>
-        </div>
+        </transition>
     `
 
 }

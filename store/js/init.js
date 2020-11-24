@@ -27,7 +27,9 @@ let content = new Vue({
             currentBrand : 0,
             brandIsActive :true,
             categoriesData:[],
-            currentObjBrand:null
+            currentObjBrand:null,
+            isProductsDownload:false,
+            isBrandsDownlaod:false
         }
     },
     components:{
@@ -40,10 +42,12 @@ let content = new Vue({
         'brands': brands,
         'header-nav': headerNav,
         'side-menu-container':sideMenuContainer,
-        'brand-selected': brandSelected
+        'brand-selected': brandSelected,
+        'loading-download':loadingDownload
     },
     methods:{
         setData(data){
+            this.isProductsDownload = true
             this.data = data;
         },
         selectBrand(id){
@@ -197,12 +201,14 @@ let content = new Vue({
             axios.post(service,form).then(function (response) {
                 //cachamos informacion 
                 content.setData(response.data);
+
             }).catch(function (error) {
                 //devolvemos error en caso de que lo haya
                 console.log(error);
             });
         },
         setBrands(brands){
+            this.isBrandsDownlaod = true
             this.dataBrands = brands;
         }
         ,

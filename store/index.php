@@ -54,6 +54,11 @@
 <body>
     <div id="store">
         <div class="container">
+            <loading-download
+                :is-active = "(isBrandsDownlaod && isProductsDownload) == true ? false : true"
+            >
+            </loading-download>
+
             <header-nav
                 nav-to-side
                 secondary-button-content = '<i class="icon-Buscar"></i>'
@@ -141,6 +146,8 @@
 <script src="<?php echo $routes->components; ?>item-producto.js"></script>
 <script src="<?php echo $routes->components; ?>brand-selected.js"></script>
 <script src="<?php echo $routes->components; ?>brands.js"></script>
+<script src="<?php echo $routes->components; ?>loading-download.js"></script>
+
 
 <!--Initialize App request and routes to services-->
 <script src="<?php echo $routes->init; ?>"></script>

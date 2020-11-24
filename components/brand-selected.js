@@ -29,13 +29,11 @@ let brandSelected = {
         'rounded-button': roundedButton
     },
     template:`
-        <transition name="show-brand-container">
-            <div v-if="brand != null" class="brand-selected">
-                <rounded-button
+        <div v-if="brand != null" class="brand-selected">
+            <rounded-button
                     :field="buttonBrand"
-                    @clicked-rounded="selectBrand"
-                ></rounded-button> 
-            </div>
-        </transition>
+                @clicked-rounded="selectBrand"
+            ></rounded-button> 
+        </div>
     `
 }
