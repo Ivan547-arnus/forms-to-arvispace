@@ -42,6 +42,7 @@ let content = new Vue({
             let service = use_mode == 'testing' ? "https://arvispace.com/lib/paymenttesting/charge.php" : "https://arvispace.com/lib/payment/charge.php";
             axios.post(service, form).then(function(response){
                 if(response.status==200){
+                    console.log(response);
                     if(response.data.status=="completed"){
                         content.activatePayment(idPayment,use_mode);
                     }

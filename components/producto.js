@@ -9,7 +9,11 @@ let producto = {
             posts:[],
             page:1,
             perPage:4,
-            pages:[]
+            pages:[],
+            isActive:{
+                type:Boolean,
+                default:true
+            }
         }
     },
     components:{
@@ -53,15 +57,13 @@ let producto = {
 		posts(){
 			this.setPages();
         },
-        page(){
-            //alert(this.page);
-        },
         productos(){
-            this.page = 1;
+            this.posts = this.$props.productos;
+            this.isActive = this.posts.length > 0 ? true : false;
         }
 	},
     template:`
-        <div class="row productos">
+        <div class="row productos" v-if="isActive">
             <h4 class="titulo">{{title}}</h4>
             <div class="col-6 col-xs-6 col-sm-6 col-md-4 col-lg-3 padding" v-for="(producto,productoIndex) in displayedPosts">
                 <div class="card shadow">

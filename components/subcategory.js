@@ -1,6 +1,7 @@
 let subcategory = {
     props:{
-        category:null
+        category:null,
+        idBrand:0
     },
     data(){
         return{
@@ -15,12 +16,18 @@ let subcategory = {
     },
     methods:{
         close(){
+            /**
+             * Reiniciamos variables para cuando se vuelva a abrir
+             */
+            this.selected = null;
             this.$emit('close-subcategory');
         }, 
         selectProducto(producto){
             this.$emit('select-producto',producto);
         },
         selectSubCategory(idSubCategory){
+            let currentBrand = this.$props.idBrand;
+            
             if(this.$props.category!=null||idSubCategory==this.idSelected){
                 if(idSubCategory==this.idSelected){
                     this.idSelected=-1;
@@ -30,7 +37,9 @@ let subcategory = {
                     let tempProductos = [];
                     this.$props.category.SubCategorias.forEach(subcategoria=>{
                         subcategoria.Productos.forEach(producto=>{
-                            tempProductos.push(producto);
+                            if(producto.idEmpresa == currentBrand){
+                                tempProductos.push(producto);
+                            }
                         });
                     });
                     //console.log(tempProductos);
@@ -43,7 +52,9 @@ let subcategory = {
                         if(subcategoria.idProducto == idSubCategory){
                             this.selected = subcategoria;
                             subcategoria.Productos.forEach(producto=>{
-                                tempProductos.push(producto);
+                                if(producto.idEmpresa == currentBrand){
+                                    tempProductos.push(producto);
+                                }
                             });
                             return false;
                         }
@@ -90,6 +101,7 @@ let subcategory = {
                         </div>
                     </div>
                 </div>      
+                
                 <component-productos
                     v-bind:productos = "productos"
                     name-to-carousel="subcategory-carousel-"

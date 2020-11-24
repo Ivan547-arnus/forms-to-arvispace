@@ -1,9 +1,9 @@
 /**
  * Area para testing comentar en prodduction
  */
-/*$(document).ready(function(){
+$(document).ready(function(){
     content.init("testing","1",'{"cp":"90796"}');
-});*/
+});
 
 
 let content = new Vue({
@@ -22,7 +22,12 @@ let content = new Vue({
             selectedProducto:null,
             selectedCategory:null,
             searchIsActive:false,
-            sideMenuIsActive:false
+            sideMenuIsActive:false,
+            dataBrands:[],
+            currentBrand : 0,
+            brandIsActive :true,
+            categoriesData:[],
+            currentObjBrand:null
         }
     },
     components:{
@@ -32,12 +37,37 @@ let content = new Vue({
         'item-producto':itemProducto,
         'subcategories':subcategory,
         'search-productos':searchProductos,
+        'brands': brands,
         'header-nav': headerNav,
-        'side-menu-container':sideMenuContainer
+        'side-menu-container':sideMenuContainer,
+        'brand-selected': brandSelected
     },
     methods:{
         setData(data){
             this.data = data;
+        },
+        selectBrand(id){
+            this.brandIsActive = false
+            this.currentBrand = id
+
+            this.dataBrands.forEach( brand =>{
+                if(brand.idEmpresa == id){
+                    this.currentObjBrand = brand
+                }
+            })
+
+            this.setCategories();
+            this.setProductos();//llenamos areglo de productos cuando note cambio en arreglo data
+            this.setMarcas();//llenamos arreglo de marcas cuando detecte un cambio en data
+            this.setTopVistos();//llenamos arreglo de mas vistos cuando detecte cambio de data
+        },
+        backToSelectBrand(){
+            this.currentObjBrand = null
+            this.currentBrand = 0
+            this.brandIsActive = true
+            this.selectedProducto = null
+            this.selectedCategory = null
+            this.searchIsActive = false
         },
         setMarcas(){
             let marcasid = [];
@@ -59,22 +89,41 @@ let content = new Vue({
             });
             this.marcas = tempMarca;
         },
+        setCategories(){
+            let tempCategorias = [];
+            this.data.forEach(categoria => {
+                try{
+                    categoria.SubCategorias.forEach(subCategoria=>{
+                        subCategoria.Productos.forEach(producto=>{
+                            if(producto.idEmpresa == this.currentBrand){
+                                tempCategorias.push(categoria)
+                                throw BreakException;
+                            }
+                        })
+                    })
+                }catch(e){
+
+                }
+            })
+            this.categoriesData = tempCategorias
+        },
         setProductos(){
             let tempProducto=[];
             this.data.forEach(categoria => {
                 categoria.SubCategorias.forEach(subCategoria=>{
                     subCategoria.Productos.forEach(producto=>{
-                        tempProducto.push(producto);
+                        if(producto.idEmpresa == this.currentBrand){
+                            tempProducto.push(producto);
+                        }
                     });
                 });
             });
 
             this.productos = tempProducto;
-            //console.log(this.productos);
         },
         setTopVistos(){
             var tempProducto = [];
-
+            
             this.productos.forEach(producto=>{
                 let acumDescarga=0;
                 producto.Caracteristicas.forEach(caracteristica=>{
@@ -92,7 +141,8 @@ let content = new Vue({
             let tempTopVistos = [];
 
             //console.log(this.limitTopVistos);
-            for (let index = 0; index < this.limitTopVistos; index++) {
+            let limit = this.productos.length < this.limitTopVistos ? this.productos.length : this.limitTopVistos
+            for (let index = 0; index < limit; index++) {
                 this.productos.forEach(producto=>{
                     if(producto.idProBodPre == tempProducto[index].idProBodPre){
                         tempTopVistos.push(producto);
@@ -151,16 +201,31 @@ let content = new Vue({
                 //devolvemos error en caso de que lo haya
                 console.log(error);
             });
+        },
+        setBrands(brands){
+            this.dataBrands = brands;
+        }
+        ,
+        getBrands(){
+            //obtenermos productos por POST con JSON
+            let service = this.initialize.use_mode == "testing" ? "https://arvispace.com/serviciosASARAmbientePruebas/getInformacionEmpresas.php" : "https://arvispace.com/serviciosASAR/getInformacionEmpresas.php"; 
+            let form = new FormData();
+            form.append('cp',this.initialize.data.cp);
+            axios.post(service,form).then(function (response) {
+                //cachamos informacion 
+                content.setBrands(response.data);
+            }).catch(function (error) {
+                //devolvemos error en caso de que lo haya
+                console.log(error);
+            });
         }
     },
     watch:{
         data(){
-            this.setProductos();//llenamos areglo de productos cuando note cambio en arreglo data
-            this.setMarcas();//llenamos arreglo de marcas cuando detecte un cambio en data
-            this.setTopVistos();//llenamos arreglo de mas vistos cuando detecte cambio de data
         },
         initialize(){
             this.getProductos();
+            this.getBrands()
         }
     },
     //ejecutamos cuando se renderee la app

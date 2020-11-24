@@ -162,10 +162,10 @@ let itemProducto = {
                                 <p v-if="producto.descripcionLarga.length > 0" class="text" v-html="producto.descripcionLarga"></p>
                                 <p v-else class="text text-center">Sin información adicional.</p>
                             </div>
-                            <div class="col-12">
+                            <div class="col-12" v-if="1>5">
                                 <p class="title-empresa">Este producto es distribuido por:</p>
                             </div>
-                            <div class="col-12">
+                            <div class="col-12" v-if="1>5">
                                 <img :src="producto.imagenEmpresa" class="img-fluid">
                             </div>
                         </div>

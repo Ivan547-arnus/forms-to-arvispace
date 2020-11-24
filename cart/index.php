@@ -1,8 +1,5 @@
 <?php
     header("Access-Control-Allow-Origin: *");
-    //include_once('https://arvispace.com/serviciosASAR/get_productos.php');    
-    //$objProducto = new producto();
-    //$objProducto = json_decode($objProducto->ToToJsonProductos(72100));
     include_once('../routes/routes.php');
     $routes = new routes();
 ?>

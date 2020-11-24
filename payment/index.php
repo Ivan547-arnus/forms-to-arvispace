@@ -21,8 +21,10 @@
     <!--Styles-->
     <link rel="stylesheet/less" href="<?php echo $routes->style;?>header.less">
     <link rel="stylesheet/less" href="<?php echo $routes->style;?>payment.less">
+    <link rel="stylesheet/less" href="<?php echo $routes->style;?>sweet-alert.less">
     <link rel="stylesheet/less" href="<?php echo $routes->style;?>side-menu.less">
     <link rel="stylesheet/less" href="<?php echo $routes->style;?>text.less">
+    <link rel="stylesheet" href="<?php echo $routes->animation ?>">
 
     <!--JS libraries-->
     <script src="<?php echo $routes->libraries;?>jquery/jquery.js"></script>
@@ -32,6 +34,8 @@
     <script src="<?php echo $routes->libraries;?>bootstrap/js/bootstrap.js"></script>
 
     
+    <!--Sweet alert libraries-->
+    <script src="<?php echo $routes->sweetAlert?>"></script>
     <!--Vue development-->
     <script src="<?php echo $routes->vue;?>"></script>
 

@@ -71,9 +71,16 @@
                     {titulo:'Volver a camara',icon:'icon-modelo-3d-con-AR', url:'uniwebview://close'}]"
             ></side-menu-container>
 
+            
+            <brand-selected
+                :brand="currentObjBrand"
+                @back-to-select-brand="backToSelectBrand"
+            ></brand-selected>
+
             <categories 
-                v-bind:categorias="data"
+                v-bind:categorias="categoriesData"
                 @selected-category="selectCategory"
+                :id-brand = "currentBrand"
             ></categories>
 
             <productos
@@ -93,8 +100,15 @@
                 v-bind:category="selectedCategory"
                 @close-subcategory = "closeSubcategory"
                 @select-producto = "setProducto"
+                :id-brand = "currentBrand"
             ></subcategories>
 
+            <brands
+                :is-active = "brandIsActive"
+                :info = "dataBrands"
+                @select-brand = "selectBrand"
+            ></brands>
+            
             <search-productos
                 v-bind:is-active="searchIsActive"
                 v-bind:list-productos = "productos"
@@ -125,6 +139,8 @@
 <script src="<?php echo $routes->components; ?>subcategory.js"></script>
 <script src="<?php echo $routes->components; ?>marcas.js"></script>
 <script src="<?php echo $routes->components; ?>item-producto.js"></script>
+<script src="<?php echo $routes->components; ?>brand-selected.js"></script>
+<script src="<?php echo $routes->components; ?>brands.js"></script>
 
 <!--Initialize App request and routes to services-->
 <script src="<?php echo $routes->init; ?>"></script>

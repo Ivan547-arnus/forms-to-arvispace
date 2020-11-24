@@ -111,62 +111,68 @@ let content = new Vue({
         },
         validateExists(formSubmit){
 
-            /*
-            /***
-             * Validamos existencias bro
-             */
-            //creamos arreglo de productos que nos ayudara a validar existencias
-            let toValidateExisting = [];
-            
-            //recorremos nuestros productos para ver cual va a comprar
-            for (let index = 0; index < this.$refs.productosInCart.$refs.dataPorProducto.length; index++) {
-                /**
-                 * Get references from childs 
+            if(this.initialize.use_mode == "testing"){
+                createAviso("Sandbox activado las compras no estan disponibles");
+                formSubmit.buttons.content = "Error";
+            }else{
+                /*
+                /***
+                 * Validamos existencias bro
                  */
-                let element = this.$refs.productosInCart.$refs.dataPorProducto[index];
-                //Variable para el producto y no entrar a cada rato a las refs de element
-                let producto = element._props.producto;
-                //objeto temporal con atributos para saber cuantos va a comprar
-                /**
-                 * esto esta estatico aun, debe de detectar cambios de cantidad y de caracteristica en front end
-                 */
-                let tempProduct = {
-                    idBodPro : producto.idProBodPre,
-                    count : element.inputNumberData.value, //estatico de mientras!
-                    id_caracteristica : producto.Caracteristicas[element.selectedIndex].idCaracteristica,
-                    codigo : producto.Caracteristicas[element.selectedIndex].codigo
-                }
-                //agregamos a nuestro arreglo
-                toValidateExisting.push(tempProduct);
-            }
-            console.log(toValidateExisting);
-
-            let form = new FormData();
-            form.append('arregloProductos',JSON.stringify(toValidateExisting));
-            //consumimos servicio
-            let service = this.initialize.use_mode == "testing" ? "https://arvispace.com/serviciosASARAmbientePruebas/validaExistencias.php" : "https://arvispace.com/serviciosASAR/validaExistencias.php"; 
-            formSubmit.buttons.content = "Validando exitencias...";
-            axios.post(service, form).then(function(response){
-                if(response.status == 200){ //validat if request is success
-                    console.log(response.data);
-                    if(response.data[0].metodo==1){
-                        /**
-                         * Hay existencias
-                         */
-                        //limpiamos el carrito de la app una vez que se inserten los datos
-                        content.createPayOrder(formSubmit);
-                    }else{
-                        /**
-                         * No hay existencias
-                         */
-                        createAviso("No podemos surtir el pedido debido a la falta de productos.");
+                //creamos arreglo de productos que nos ayudara a validar existencias
+                let toValidateExisting = [];
+                
+                //recorremos nuestros productos para ver cual va a comprar
+                for (let index = 0; index < this.$refs.productosInCart.$refs.dataPorProducto.length; index++) {
+                    /**
+                     * Get references from childs 
+                     */
+                    let element = this.$refs.productosInCart.$refs.dataPorProducto[index];
+                    //Variable para el producto y no entrar a cada rato a las refs de element
+                    let producto = element._props.producto;
+                    //objeto temporal con atributos para saber cuantos va a comprar
+                    /**
+                     * esto esta estatico aun, debe de detectar cambios de cantidad y de caracteristica en front end
+                     */
+                    let tempProduct = {
+                        idBodPro : producto.idProBodPre,
+                        count : element.inputNumberData.value, //estatico de mientras!
+                        id_caracteristica : producto.Caracteristicas[element.selectedIndex].idCaracteristica,
+                        codigo : producto.Caracteristicas[element.selectedIndex].codigo
                     }
+                    //agregamos a nuestro arreglo
+                    toValidateExisting.push(tempProduct);
                 }
-            }).catch(function(e){
-                createAviso(e);
-                formSubmit.buttons.content = "Confirmar compra";
-                formSubmit.buttons.disabled = false;
-            });
+                console.log(toValidateExisting);
+
+                let form = new FormData();
+                form.append('arregloProductos',JSON.stringify(toValidateExisting));
+                //consumimos servicio
+                let service = this.initialize.use_mode == "testing" ? "https://arvispace.com/serviciosASARAmbientePruebas/validaExistencias.php" : "https://arvispace.com/serviciosASAR/validaExistencias.php"; 
+                formSubmit.buttons.content = "Validando exitencias...";
+                axios.post(service, form).then(function(response){
+                    if(response.status == 200){ //validat if request is success
+                        console.log(response.data);
+                        if(response.data[0].metodo==1){
+                            /**
+                             * Hay existencias
+                             */
+                            //limpiamos el carrito de la app una vez que se inserten los datos
+                            content.createPayOrder(formSubmit);
+                        }else{
+                            /**
+                             * No hay existencias
+                             */
+                            createAviso("No podemos surtir el pedido debido a la falta de productos.");
+                        }
+                    }
+                }).catch(function(e){
+                    createAviso(e);
+                    formSubmit.buttons.content = "Reintentar";
+                    formSubmit.buttons.disabled = false;
+                });
+            }
+            
         },
         createPayOrder(formSubmit){
             let form = new FormData();
@@ -196,14 +202,14 @@ let content = new Vue({
                         content.insertOrder(response.data,formSubmit)
                     }else{
                         createAviso(response.data);
-                        formSubmit.buttons.content = "Confirmar compra";
+                        formSubmit.buttons.content = "Reintentar";
                         formSubmit.buttons.disabled = false;
                     }
                 }
             }).catch(function(e){
                 
                 createAviso(e);
-                formSubmit.buttons.content = "Confirmar compra";
+                formSubmit.buttons.content = "Reintentar";
                 formSubmit.buttons.disabled = false;
                 console.log(e);
             });
@@ -264,13 +270,13 @@ let content = new Vue({
                         //window.location.replace(responseBank.url);
                     }else{
                         createAviso("Error inesperado intentelo nuevamente");
-                        formSubmit.buttons.content = "Confirmar compra";
+                        formSubmit.buttons.content = "Reintentar";
                         formSubmit.buttons.disabled = false;
                     }
                 }
             }).catch(function(e){
                 createAviso(e);
-                formSubmit.buttons.content = "Confirmar compra";
+                formSubmit.buttons.content = "Reintentar";
                 formSubmit.buttons.disabled = false;
                 console.log(e);
             });
