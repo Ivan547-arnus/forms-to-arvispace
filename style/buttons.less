@@ -1,3 +1,8 @@
+:root{
+    --bg-rounded-button:rgb(255 255 255 / 30%);
+    --bg-primary-button:rgb(15 15 25 / 100%);
+}
+
 .roudend-button{
     text-align: center;
     height: 60px;
@@ -12,7 +17,7 @@
     outline: none;
     position: relative;
     font-size: 1.5rem;
-    background-color: white;
+    background-color: var(--bg-rounded-button);
 }
 .roudend-button.center{
     text-align: center;
@@ -28,7 +33,7 @@
     outline: none;
     position: relative;
     left: calc(50% - 30px);
-    background-color: white;
+    background-color: var(--bg-rounded-button);
 }
 .roudend-button.sm{
     text-align: center;
@@ -43,7 +48,7 @@
     border: 0;
     outline: none;
     position: relative;
-    background-color: white;
+    background-color: var(--bg-rounded-button);
 }
 .roudend-button.md{
     text-align: center;
@@ -58,7 +63,7 @@
     border: 0;
     outline: none;
     position: relative;
-    background-color: white;
+    background-color: var(--bg-rounded-button);
 }
 .roudend-button.lg{
     text-align: center;
@@ -73,7 +78,7 @@
     border: 0;
     outline: none;
     position: relative;
-    background-color: white;
+    background-color: var(--bg-rounded-button);
 }
 .roudend-button.xl{
     text-align: center;
@@ -88,7 +93,7 @@
     border: 0;
     outline: none;
     position: relative;
-    background-color: white;
+    background-color: var(--bg-rounded-button);
 }
 
 .roudend-button.top-end {
@@ -105,7 +110,7 @@
     outline: none;
     position: relative;
     font-size: 1.5rem;
-    background-color: white;
+    background-color: var(--bg-rounded-button);
     /* float: right; */
     position: absolute;
     right: 0;
@@ -121,13 +126,13 @@
     letter-spacing: .025em !important;
     font-size: .875rem !important;
     height: 50px;
-    border-radius: 50px !important;
+    border-radius: 20px !important;
 }
 
 .btn-primary{
     color: #fff !important;
-    background-color: #0F0F19 !important;
-    border-color: #0F0F19 !important;
+    background-color: var(--bg-primary-button) !important;
+    border-color: transparent !important;
 }
 
 

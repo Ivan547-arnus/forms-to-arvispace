@@ -7,12 +7,12 @@ let marker;
 let geocoder;
 let infowindow;
 
-/*$(document).ready(function(){
+$(document).ready(function(){
     content.init("testing","1",'{"lat":19.1232528,"lng":-98.2237298}');
     //18.781571,-98.9887522  Anenenuilco
     //18.7425098,-98.9868339 col elijal
     //19.1232528, -98.2237298 agricola covadonga
-});*/
+});
 function initMap() {
 
     infowindow = new google.maps.InfoWindow();
@@ -143,12 +143,14 @@ let content = new Vue({
         changeInputAddress(value){
             geocodeAddress(value);
         },
-        selectedAddress(){
+        selectedAddress(address){
+            console.log(address);
             if(this.postalCode == ""){
                 createAviso("Lo sentimos no tenemos alcance en esta zona");
             }else{
-            
-                comunicateWebView("location","postal_code="+this.postalCode);
+                createQuestion("Dirección de entrega",address.formatted_address ,true,()=>{
+                    comunicateWebView("location","postal_code="+this.postalCode);
+                })
             }
         },
         activateListAdress(address){

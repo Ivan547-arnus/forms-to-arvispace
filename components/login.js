@@ -23,10 +23,10 @@ let login = {
                         name: 'input_user',
                         placeholder: 'Email/Numero',
                         validation:function(value){
-                            if(value != ""){
-                                return true;
+                            if(value.length == 0){
+                                return {isValid : false, msg : "Campo Requerido"};
                             }else{
-                                return false;
+                                return {isValid : true, msg : ""};
                             }
                         }
                     },
@@ -35,10 +35,10 @@ let login = {
                         name: 'input_password',
                         placeholder: 'Contraseña',
                         validation:function(value){
-                            if(value != ""){
-                                return true;
+                            if(value.length == 0){
+                                return {isValid : false, msg : "Campo Requerido"};
                             }else{
-                                return false;
+                                return {isValid : true, msg : ""};
                             }
                         }
                     }
@@ -68,6 +68,20 @@ let login = {
             }
         }
     },
+    watch:{
+        'formDefaultData.input_user.value':function(newValue, oldValue){
+            let field = this.formSchema.fields.filter(x => x.name == "input_user");
+            let res = field[0].validation(newValue);
+            this.formDefaultData.input_user.error.isActive = !res.isValid
+            this.formDefaultData.input_user.error.message = res.msg
+        },
+        'formDefaultData.input_password.value':function(newValue, oldValue){
+            let field = this.formSchema.fields.filter(x => x.name == "input_password");
+            let res = field[0].validation(newValue);
+            this.formDefaultData.input_password.error.isActive = !res.isValid
+            this.formDefaultData.input_password.error.message = res.msg
+        },
+    },
     methods: {
         onSubmit(form){
             let currentContentButton = this.buttons.content;
@@ -76,7 +90,7 @@ let login = {
             let bandera = true;
             this.formSchema.fields.forEach(field=>{
                 if(typeof field.validation == 'function'){
-                    if(!field.validation(this.formDefaultData[field.name].value)){
+                    if(!field.validation(this.formDefaultData[field.name].value).isValid){
                         this.formDefaultData[field.name].error.isActive=true;
                         bandera = false;
                     }else{

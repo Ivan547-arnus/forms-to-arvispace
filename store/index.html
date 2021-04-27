@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+    <!--General styles-->
+    <link rel="stylesheet/less" href="../style/carousel.less">
+    <link rel="stylesheet/less" href="../style/close.less">
+
+
+    <!--Styles-->
+    <link rel="stylesheet/less" href="../style/header.less">
+    <link rel="stylesheet/less" href="../style/sweet-alert.less">
+    <link rel="stylesheet/less" href="../style/side-menu.less">
+    <link rel="stylesheet/less" href="../style/document.less">
+    <link rel="stylesheet/less" href="../style/content-store.less">
+    <link rel="stylesheet/less" href="../style/buttons.less">
+    <link rel="stylesheet/less" href="../style/container-caracteristica.less">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+
+    <!--JS libraries-->
+    <script src="https://arvispace.com/lib/jquery/jquery.js"></script>
+    
+    <!--JS Bootstrap scripts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://arvispace.com/lib/bootstrap/js/bootstrap.js"></script>
+
+    <!--Sweet alert libraries-->
+    <script src="https://arvispace.com/lib/sweet-alert/dist/sweetalert2.all.min.js"></script>
+    <!--Vue development-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!--Less style-->
+    <script src="https://cdn.jsdelivr.net/npm/less"></script>
+
+    <!--Axios http request-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!--CSS libraries-->
+    <link rel="stylesheet" href="https://arvispace.com/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://arvispace.com/lib/icons/index.css">
+    
+</head>
+<body>
+    <div id="store">
+        <div class="container">
+            <loading-download
+                :is-active = "(isBrandsDownlaod && isProductsDownload) == true ? false : true"
+            >
+            </loading-download>
+
+            <header-nav
+                nav-to-side
+                secondary-button-content = '<i class="icon-Buscar"></i>'
+                @set-side-menu="setSideMenu"
+                @secondary-click="setSearchContainer"
+            ></header-nav>
+
+            <side-menu-container
+                v-bind:is-active="sideMenuIsActive"
+                @set-side-menu="setSideMenu"
+                :options="
+                    [{titulo:'Perfil',icon:'icon-Usuario' ,url:'uniwebview://open-profile'},
+                    {titulo:'Mi carrito',icon:'icon-carrito2', url:'uniwebview://open-cart'},
+                    {titulo:'Mis pedidos',icon:'icon-Pedido', url:'uniwebview://open-profile'},
+                    {titulo:'Volver a camara',icon:'icon-modelo-3d-con-AR', url:'uniwebview://close'}]"
+            ></side-menu-container>
+
+            
+            <brand-selected
+                :brand="currentObjBrand"
+                @back-to-select-brand="backToSelectBrand"
+            ></brand-selected>
+
+            <categories 
+                v-bind:categorias="categoriesData"
+                @selected-category="selectCategory"
+                :id-brand = "currentBrand"
+            ></categories>
+
+            <productos
+                v-bind:productos = "topVistos"
+                name-to-carousel="top-vistos-carousel-"
+                title = "Mas vistos"
+                @selected-producto = "setProducto"
+            ></productos> 
+
+            <item-producto
+                v-bind:producto = "selectedProducto"
+                @close-item-producto = "closeItemProducto"
+            ></item-producto>
+
+
+            <subcategories
+                v-bind:category="selectedCategory"
+                @close-subcategory = "closeSubcategory"
+                @select-producto = "setProducto"
+                :id-brand = "currentBrand"
+            ></subcategories>
+
+            <brands
+                :is-active = "brandIsActive"
+                :info = "dataBrands"
+                @select-brand = "selectBrand"
+            ></brands>
+            
+            <search-productos
+                v-bind:is-active="searchIsActive"
+                v-bind:list-productos = "productos"
+                @close-search="closeSearch"
+                @selected-producto="setProducto"
+            ></search-productos>
+
+        </div>
+    </div>
+</body>
+<!--Scripts jquery to Vue-->
+<script src="../js/utils.js"></script>
+
+<!--General components-->
+<script src="../components/empty-component.js"></script>
+<script src="../components/rounded-buttons.js"></script>
+<script src="../components/header.js"></script>
+<script src="../components/side-menu.js"></script>
+<script src="../components/close-container.js"></script>
+<script src="../components/image-to-carousel.js"></script>
+
+<!--Components by vue-->
+<script src="../components/container-caracteristica.js"></script>
+<script src="../components/carousel.js"></script>
+<script src="../components/producto.js"></script>
+<script src="../components/search-products.js"></script>
+<script src="../components/category.js"></script>
+<script src="../components/subcategory.js"></script>
+<script src="../components/marcas.js"></script>
+<script src="../components/item-producto.js"></script>
+<script src="../components/brand-selected.js"></script>
+<script src="../components/brands.js"></script>
+<script src="../components/loading-download.js"></script>
+
+
+<!--Initialize App request and routes to services-->
+<script src="js/init.js"></script>
+</html>

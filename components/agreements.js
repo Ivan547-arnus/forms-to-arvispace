@@ -17,7 +17,7 @@ let agreements = {
         }
     },
     template:`
-        <div class="container mb-3">
+        <div class="container">
             <h1 class="text-center Lousie-George-Bold">AVISO DE PRIVACIDAD</h1>
             <p>
                 CONSULTORES EN DESARROLLO TECNOLOGICO DE SISTEMAS DTI S.A. DE C.V., es una sociedad mercantil de nacionalidad mexicana, con domicilio en Carretera Industrias Oriente 2-C, colonia Centro, localidad Panzacola, C.P. 90796, Papalotla de Xicohtencatl, Tlaxcala, es la responsable del uso y protección de los datos personales que proporcione para tener acceso y utilizar los servicios de <i class="Lousie-George-Bold">“ARVISPACE”</i>, Aplicación Móvil  de Realidad Aumentada que pone a disposición diversos servicios, datos que serán protegidos conforme a lo dispuesto por la Ley Federal de Protección de Datos Personales en Posesión de los Particulares; al respecto le informamos lo siguiente: 
@@ -29,6 +29,8 @@ let agreements = {
                 @clicked-button="acceptAgreements"
                 :field="buttonAccept"
             ></primary-button-block>
+            <br>
+            <br>
         </div>
     `
 };

@@ -1,10 +1,9 @@
 /**
  * Area para testing comentar en prodduction
  */
-$(document).ready(function(){
+/*$(document).ready(function(){
     content.init("testing","1",'{"cp":"90796"}');
-});
-
+});*/
 
 let content = new Vue({
     el:'#store',
@@ -49,6 +48,7 @@ let content = new Vue({
         setData(data){
             this.isProductsDownload = true
             this.data = data;
+            this.getBrands();
         },
         selectBrand(id){
             this.brandIsActive = false
@@ -127,7 +127,7 @@ let content = new Vue({
         },
         setTopVistos(){
             var tempProducto = [];
-            
+
             this.productos.forEach(producto=>{
                 let acumDescarga=0;
                 producto.Caracteristicas.forEach(caracteristica=>{
@@ -165,7 +165,7 @@ let content = new Vue({
             this.selectedProducto = null; //vaciamos apara ocultar from del producto
         },
         closeSubcategory(){
-            this.selectedCategory = null; //vaciamos para ocultar form 
+            this.selectedCategory = null; //vaciamos para ocultar form
         },
         selectCategory(idCategoria){
             this.selectedCategory = true;
@@ -195,11 +195,11 @@ let content = new Vue({
         },
         getProductos(){
             //obtenermos productos por POST con JSON
-            let service = this.initialize.use_mode == "testing" ? "https://arvispace.com/serviciosASARAmbientePruebas/ProductosAsar.php" : "https://arvispace.com/serviciosASAR/ProductosAsar.php"; 
+            let service = this.initialize.use_mode == "testing" ? "https://arvispace.com/serviciosASARAmbientePruebas/ProductosAsar.php" : "https://arvispace.com/serviciosASAR/ProductosAsar.php";
             let form = new FormData();
             form.append('cp',this.initialize.data.cp);
             axios.post(service,form).then(function (response) {
-                //cachamos informacion 
+                //cachamos informacion
                 content.setData(response.data);
 
             }).catch(function (error) {
@@ -209,16 +209,32 @@ let content = new Vue({
         },
         setBrands(brands){
             this.isBrandsDownlaod = true
-            this.dataBrands = brands;
+            let tempBrands = []
+            brands.forEach((brand) =>{
+              let band = false
+              this.data.forEach(categoria => {
+                categoria.SubCategorias.forEach(subCategoria=>{
+                    subCategoria.Productos.forEach(producto=>{
+                        if(brand.idEmpresa == producto.idEmpresa){
+                          band = true
+                        }
+                    });
+                });
+              });
+              if(band){
+                tempBrands.push(brand)
+              }
+            })
+            this.dataBrands = tempBrands
         }
         ,
         getBrands(){
             //obtenermos productos por POST con JSON
-            let service = this.initialize.use_mode == "testing" ? "https://arvispace.com/serviciosASARAmbientePruebas/getInformacionEmpresas.php" : "https://arvispace.com/serviciosASAR/getInformacionEmpresas.php"; 
+            let service = this.initialize.use_mode == "testing" ? "https://arvispace.com/serviciosASARAmbientePruebas/getInformacionEmpresas.php" : "https://arvispace.com/serviciosASAR/getInformacionEmpresas.php";
             let form = new FormData();
             form.append('cp',this.initialize.data.cp);
             axios.post(service,form).then(function (response) {
-                //cachamos informacion 
+                //cachamos informacion
                 content.setBrands(response.data);
             }).catch(function (error) {
                 //devolvemos error en caso de que lo haya
@@ -231,7 +247,6 @@ let content = new Vue({
         },
         initialize(){
             this.getProductos();
-            this.getBrands()
         }
     },
     //ejecutamos cuando se renderee la app

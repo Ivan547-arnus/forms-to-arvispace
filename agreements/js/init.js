@@ -10,7 +10,8 @@ let content = new Vue({
     el:"#agreements",
     components:{
         'header-nav':headerNav,
-        'agreements':agreements
+        'agreements':agreements,
+        'glassmorphism':glassmorphism
     },
     data(){
         return{

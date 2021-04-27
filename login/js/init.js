@@ -1,16 +1,18 @@
 /**
  * Area para testing comentar en prodduction
  */
-/*$(document).ready(function(){
+$(document).ready(function(){
     content.init("testing","1","{}")
 });
-*/
+
 
 let content = new Vue({
     el:"#login",
     components:{
         'component-login':login,
-        'component-register':register
+        'component-register':register,
+        'user-principal':userPrincipal,
+        'ar-anim':arAnim
     },
     data(){
         return{

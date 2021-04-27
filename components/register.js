@@ -25,9 +25,9 @@ let register = {
                         placeholder: 'Nombre completo',
                         validation:function(value){
                             if(value != ""){
-                                return true;
+                                return {isValid : true, msg : ""};
                             }else{
-                                return false;
+                                return {isValid : false, msg : "Campo Requerido"};
                             }
                         }
                     },
@@ -36,10 +36,13 @@ let register = {
                         name: 'input_apodo',
                         placeholder: 'Nombre se usuario (apodo)',
                         validation:function(value){
-                            if(value != ""){
-                                return true;
+                            if(value.length == 0){
+                                return {isValid : false, msg : "Campo Requerido"};
+                            }
+                            else if(value.length < 4){
+                                return {isValid : false, msg : "Debe tener minimo 4 caracteres"};
                             }else{
-                                return false;
+                                return {isValid : true, msg : ""};
                             }
                         }
                     },
@@ -49,10 +52,13 @@ let register = {
                         placeholder: 'Email',
                         validation:function(value){
                             let reg =  /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-                            if(reg.test(value)){
-                                return true;
+                            if(value.length == 0){
+                                return {isValid : false, msg : "Campo requerido"};
+                            }
+                            if(!reg.test(value)){
+                                return {isValid : false, msg : "Formato invalido"};
                             }else{
-                                return false;
+                                return {isValid : true, msg : ""};
                             }
                         }
                     },
@@ -61,10 +67,18 @@ let register = {
                         name: 'input_telefono',
                         placeholder: 'Ingresa tu numero de telefono',
                         validation:function(value){
-                            if(value != ""){
-                                return true;
+                            let letters = value.split('').filter(x => /\d/.test(x) == false);
+                            if(letters.length > 0){
+                                return {isValid : false, msg : "Esta campo no permite letras"};
+                            }else if(value.length < 10){
+                                return {isValid : false, msg : "Debe tener 10 caracteres"};
+                            }
+                            else if(value.length > 10){
+                                return {isValid : false, msg : "No puedes tener mas de 10 caracteres"};
+                            }else if(value.length == 0){
+                                return {isValid : false, msg : "Campo requerido"};
                             }else{
-                                return false;
+                                return {isValid : true, msg : ""};
                             }
                         }
                     },
@@ -73,10 +87,10 @@ let register = {
                         name: 'input_password',
                         placeholder: 'Contraseña',
                         validation:function(value){
-                            if(value != ""){
-                                return true;
+                            if(value.length <= 8){
+                                return {isValid : false, msg : "Su contraseña debe de tener mas de 8 caracteres"};
                             }else{
-                                return false;
+                                return {isValid : true, msg : ""};
                             }
                         },
                         comparation:function(value,compareValue){
@@ -92,10 +106,10 @@ let register = {
                         name: 'input_r_password',
                         placeholder: 'Repetir Contraseña',
                         validation:function(value){
-                            if(value != ""){
-                                return true;
+                            if(value.length <= 8){
+                                return {isValid : false, msg : "Su contraseña debe de tener mas de 8 caracteres"};
                             }else{
-                                return false;
+                                return {isValid : true, msg : ""};
                             }
                         }
                     }
@@ -127,7 +141,7 @@ let register = {
                     value: '',
                     error:{
                         isActive:false,
-                        message:"Necesita ingresar un correo."
+                        message:"Campo requerido"
                     }
                 },
                 input_password: {
@@ -154,6 +168,44 @@ let register = {
             }
         }
     },
+    watch:{
+        'formDefaultData.input_nombre.value':function(newValue, oldValue){
+            let field = this.formSchema.fields.filter(x => x.name == "input_nombre");
+            let res = field[0].validation(newValue);
+            this.formDefaultData.input_nombre.error.isActive = !res.isValid
+            this.formDefaultData.input_nombre.error.message = res.msg
+        },
+        'formDefaultData.input_apodo.value':function(newValue, oldValue){
+            let field = this.formSchema.fields.filter(x => x.name == "input_apodo");
+            let res = field[0].validation(newValue);
+            this.formDefaultData.input_apodo.error.isActive = !res.isValid
+            this.formDefaultData.input_apodo.error.message = res.msg
+        },
+        'formDefaultData.input_email.value':function(newValue, oldValue){
+            let field = this.formSchema.fields.filter(x => x.name == "input_email");
+            let res = field[0].validation(newValue);
+            this.formDefaultData.input_email.error.isActive = !res.isValid
+            this.formDefaultData.input_email.error.message = res.msg
+        },
+        'formDefaultData.input_password.value':function(newValue, oldValue){
+            let field = this.formSchema.fields.filter(x => x.name == "input_password");
+            let res = field[0].validation(newValue);
+            this.formDefaultData.input_password.error.isActive = !res.isValid
+            this.formDefaultData.input_password.error.message = res.msg
+        },
+        'formDefaultData.input_r_password.value':function(newValue, oldValue){
+            let field = this.formSchema.fields.filter(x => x.name == "input_r_password");
+            let res = field[0].validation(newValue);
+            this.formDefaultData.input_r_password.error.isActive = !res.isValid
+            this.formDefaultData.input_r_password.error.message = res.msg
+        },
+        'formDefaultData.input_telefono.value': function(newValue, oldValue){
+            let field = this.formSchema.fields.filter(x => x.name == "input_telefono");
+            let res = field[0].validation(newValue);
+            this.formDefaultData.input_telefono.error.isActive = !res.isValid
+            this.formDefaultData.input_telefono.error.message = res.msg
+        }
+    },
     methods: {
         onSubmit(form){
             
@@ -163,7 +215,7 @@ let register = {
             let bandera = true;
             this.formSchema.fields.forEach(field=>{
                 if(typeof field.validation == 'function'){
-                    if(!field.validation(this.formDefaultData[field.name].value)){
+                    if(!field.validation(this.formDefaultData[field.name].value).isValid){
                         this.formDefaultData[field.name].error.isActive=true;
                         bandera = false;
                     }else{
@@ -173,7 +225,7 @@ let register = {
                 if(typeof field.comparation == 'function' && !this.formDefaultData[field.name].error.isActive){
                     if(!field.comparation(this.formDefaultData[field.name].value, this.formDefaultData[this.formDefaultData[field.name].toCompare].value)){
                         this.formDefaultData[field.name].error.isActive=true;
-                        this.formDefaultData[field.name].error.message="Contraseñas no coinciden";
+                        this.formDefaultData[field.name].error.message = "Contraseñas no coinciden";
                         bandera = false;
                     }else{
                         this.formDefaultData[field.name].error.isActive=false;

@@ -80,6 +80,10 @@ let brands = {
             yDown = 0;                                             
         },
         calculateClass(index){
+            if(this.$props.info.length==1 && index == 0){
+                return "active"
+            }
+
             if(this.selectedIndex-1 < 0 && index == this.$props.info.length-1){
                 return "semi-active-top"
             }else if(this.selectedIndex+1 >= this.$props.info.length && index == 0){

@@ -66,3 +66,31 @@ const createAviso = (text)=>{
         title: '<label>'+text+'</label>'
     })
 }
+
+const createQuestion = (title,text,cancelButtonIsActive = true,okCallBack = () => {}, cancelCallBack = () => {}) => {
+    Swal.fire({
+        title:title,
+        text: text,
+        showCancelButton: cancelButtonIsActive,
+        position: 'center',
+        confirmButtonText: '<i class="icon-Correcto">',
+        cancelButtonText: '<i class="icon-x"></i>',
+        showClass: {
+            popup: 'animate__animated animate__fadeInUp'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutDown'
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+            if(typeof okCallBack == 'function'){
+                okCallBack()
+            }
+        }else{
+            if(typeof cancelCallBack == 'function'){
+                cancelCallBack()
+            }
+        }
+    })
+
+}
