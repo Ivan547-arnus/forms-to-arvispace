@@ -8,17 +8,17 @@ let arAnim = {
         <div class=logo>
             <img class=logo-img src="../images/logo.png" alt="">
         </div>
-        <div class="imagenes">
-            <div>
-            <img class="img1" src="../images/imgpsh_fullsize_anim (2).png" alt="">
+            
+            <div class="cube-wrap cw1">
+                <div class="img1 sides "></div>      
             </div>
-            <div>
-            <img class="img2" src="../images/imgpsh_fullsize_anim (3).png" alt="">
+            <div class="cube-wrap cw2">
+                <div class="img2 sides"></div>     
             </div>
-            <div>
-            <img class="img3" src="../images/imgpsh_fullsize_anim (4).png" alt="">
+            <div class="cube-wrap cw3">
+                <div class="img3 sides"></div>     
             </div>
-        </div>
+           
         <div class="presentation">
                 <svg width="100vw" height="60vh" viewBox="0 0 580 482" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="spheres">
