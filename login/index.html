@@ -8,6 +8,7 @@
     <title>Login</title>
 
     <!--General styles-->
+    <link rel="stylesheet/less" href="../style/animations.less">
     <link rel="stylesheet/less" href="../style/buttons.less">
     <link rel="stylesheet/less" href="../style/ar-anim.less">
     <link rel="stylesheet/less" href="../style/sweet-alert.less">
@@ -50,11 +51,11 @@
         </ar-anim>
         <user-principal>
         </user-principal>
-        <component-login
+        <!-- <component-login
             :is-active="isLoginActive"
             @on-submit="onSubmit"
             @open-register="setContent"
-        ></component-login>
+        ></component-login> -->
         <component-register
             :is-active="isRegisterActive"
             @on-submit="onRegister"

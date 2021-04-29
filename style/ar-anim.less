@@ -1,14 +1,91 @@
-.anim__container{
-    width: 100%;
-    height: 320px;
-    padding: 10px;
+body {
+    background-color: #f2f3f7 !important;
+  }
+.anim__container {
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
+  padding: 0 !important;
+  .logo {
+    display: flex;
+    margin: auto;
+    height: 10rem;
+    filter: invert(1);
+    .logo-img {
+      width: 10rem;
+      margin: auto;
+    }
+  }
+
+  .imagenes{
+    position:absolute;
+    // position: fixed;
+    position:absolute;
+    top:50%; 
+    left:50%;
+    transform-style: preserve-3d;
+    transform-origin:0 0 -50vw;
+    transform: perspective(600px) translate3D(-37px, 4px, 104px) scale(0.9);
+        img{
+            position:absolute;
+            top:0;left:0;
+            width:30vw;
+            transform-origin:50% 50% -50vw;
+            transform:translate3d(-50%,-50%,0);
+            transform-style: preserve-3d;
+        }
+  }
+
+  .presentation {
+    height: 50vh;
+    margin: auto;
+    position: absolute;
+  }
+
+  .background-button{
+    bottom: 0px;
+    margin-bottom: 1.2rem;
+    margin-left: 10px;
+    position: absolute;
+    width: calc(100% - 20px);
+    height: 30vh;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 10;
+    color: black;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: all 0.5s;
+    border-radius: 20px;
+    filter: drop-shadow(1px 1px 1px rgba(76, 74, 74, 0.687));
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+    .buttons {
+        display: grid;
+        margin: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 2rem;
+      }
+  }
+
+  
 }
 
-.cls-6{
-    fill: #0A2042;
+
+.cls-6 {
+  fill: #0a2042;
 }
 
-.cls-1{
-    background: rgb(100,146,215);
-    fill: linear-gradient(117deg, rgba(100,146,215,1) 0%, rgba(178,205,249,1) 53%);
+.cls-1 {
+  background: rgb(100, 146, 215);
+  fill: linear-gradient(
+    117deg,
+    rgba(100, 146, 215, 1) 0%,
+    rgba(178, 205, 249, 1) 53%
+  );
+}
+
+.body {
+  background-color: #f2f3f7 !important;
 }
