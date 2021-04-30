@@ -9,7 +9,7 @@ body {
   .logo {
     display: flex;
     margin: auto;
-    height: 10rem;
+    height: 10vh;
     filter: invert(1);
     .logo-img {
       width: 10rem;
@@ -21,7 +21,7 @@ body {
   .wrap {
     left: 50%;
     top: 87%;
-    position: absolute;
+    position: fixed;
     width: 50%;
     padding-bottom:100%;
     transform: translate(-40%, -60%);
@@ -30,11 +30,11 @@ body {
   }
   
   .cube-wrap {
-    position: absolute;
-    left: 0;
-    top: 40%;
+    position: fixed;
+    // left: 0;
+    top: 30%;
     width: 100%;
-    height: 50%;
+    height: 50vh;
     transform-style: preserve-3d;
     // overflow: visible;
     transform-origin: center;
@@ -54,14 +54,17 @@ body {
   }
  
   .img1 {
+    filter: drop-shadow(0px 1px 9px rgba(98, 98, 98, 0.537));
     background-image: url("../images/imgpsh_fullsize_anim\ \(2\).png");
   }
   
   .img2{
+    filter: drop-shadow(0px 1px 9px rgba(98, 98, 98, 0.537));
     background-image: url("../images/imgpsh_fullsize_anim\ \(4\).png");
   }
   
   .img3 {
+    filter: drop-shadow(0px 1px 9px rgba(98, 98, 98, 0.537));
     background-image: url("../images/imgpsh_fullsize_anim\ \(3\).png");
     
   /*   background-image: url(https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/541427_10153663949530370_1132497890_n.jpg?oh=8ab33eb7dbfcac2154f7b9a2fc07e39c&oe=5A4B7C4B); */
@@ -69,9 +72,8 @@ body {
 
 
   .imagenes{
-    position:absolute;
-    // position: fixed;
-    position:absolute;
+    // position:absolute;
+    position: fixed;
     top:50%; 
     left:50%;
     transform-style: preserve-3d;
@@ -94,22 +96,23 @@ body {
   }
 
   .background-button{
-    bottom: 0px;
-    margin-bottom: 1.2rem;
-    margin-left: 10px;
+    bottom: 0px !important;
+    // margin-bottom: 1.2rem;
+    margin-left: 0.5rem;
     position: absolute;
     width: calc(100% - 20px);
     height: 30vh;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgb(0 0 0 / 20%);
     z-index: 10;
     color: black;
     overflow-y: scroll;
     overflow-x: hidden;
     transition: all 0.5s;
-    border-radius: 20px;
-    filter: drop-shadow(1px 1px 1px rgba(76, 74, 74, 0.687));
+    border-radius: 10px 10px 0px 0px;
     backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+    // backdrop-filter: blur(2px);
+    // -webkit-backdrop-filter: blur(2px);
+
 
     .buttons {
         display: grid;
