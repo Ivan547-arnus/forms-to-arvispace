@@ -78,17 +78,21 @@
         @request-facebook="requestFacebook"
         @request-google="requestGoogle"
         @request-apple="requestApple" 
+        @active-login="handleLogin"
+        @active-register="handleRegister"
         >
         </ar-anim>
         <user-principal
         >
         </user-principal>
-        <!-- <component-login
+        <component-login
+            @hide-login="handleLogin"
             :is-active="isLoginActive"
             @on-submit="onSubmit"
             @open-register="setContent"
-        ></component-login> -->
+        ></component-login>
         <component-register
+            @hide-register="handleRegister"
             :is-active="isRegisterActive"
             @on-submit="onRegister"
             @open-login="setContent"

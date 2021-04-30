@@ -29,6 +29,7 @@ let arAnim = {
         }
     },
     components:{
+
         'primary-button-block': primaryButtonBlock,
     },
     mounted(){
@@ -39,9 +40,9 @@ let arAnim = {
             console.log("Register")
             this.$emit('active-register')
           },
-          handleLogin(){
-            this.$emit('active-login')
-          },requestFacebook() {
+           handleLogin(){
+        this.$emit('active-login')
+      },requestFacebook() {
             console.log("facebook")
             this.$emit("request-facebook");
           },

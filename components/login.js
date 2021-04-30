@@ -1,6 +1,6 @@
 let login = {
-    props:{
-        isActive:false
+    props: {
+        isActive: false,
     },
     components:{
         'rounded-button':roundedButton,
@@ -106,26 +106,29 @@ let login = {
             }
         },
         setActiveRegister(){
+            console.log("emmit register");
             this.$emit('open-register');
+        },
+        hideLogin(){
+            
+            this.$emit('hide-login')
         }
     },
     template:`
+    
         <div class="container-fluid" v-show="isActive">
-            <div class="login-head">
-            </div>
-            <rounded-button
-                :field="buttonHeaderUser"
-            ></rounded-button>
-            <div class="container">
-                <component-form
-                    :schema="formSchema"
-                    :data="formDefaultData"
-                    :buttons="buttons"
-                    @on-submit="onSubmit"
-                ></component-form>  
-                <p>¿No tienes cuenta? <a href="#" @click="setActiveRegister">Registrate aqui</a></p>
-                <p class="cancel"><a href="uniwebview://close" >Cancelar</a></p>
-            </div>
+        <transition name="fade">
+                <div class="container">
+                    <component-form
+                        :schema="formSchema"
+                        :data="formDefaultData"
+                        :buttons="buttons"
+                        @on-submit="onSubmit"
+                    ></component-form>  
+                    <p>¿No tienes cuenta? <a href="#" @click="setActiveRegister">Registrate aqui</a></p>
+                    <p class="cancel" @click="hideLogin">Cancelar</p>
+                </div>
+                </transition>
         </div>
     `
 }

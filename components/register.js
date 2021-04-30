@@ -241,15 +241,14 @@ let register = {
         },
         setActiveLogin(){
             this.$emit('open-login');
+        },
+        hideRegister(){
+            this.$emit('hide-register')
         }
     },
     template:`
+    <div id="register">
         <div class="container-fluid" v-show="isActive">
-            <div class="login-head">
-            </div>
-            <rounded-button
-                :field="buttonHeaderUser"
-            ></rounded-button>
             <div class="container">
                 <component-form
                     :schema="formSchema"
@@ -258,8 +257,9 @@ let register = {
                     @on-submit="onSubmit"
                 ></component-form>  
                 <p>¿Ya tienes cuenta? <a href="#" @click="setActiveLogin">Inicia sesión aqui</a></p>
-                <p class="cancel"><a href="uniwebview://close" >Cancelar</a></p>
+                <p class="cancel" @click="hideRegister">Cancelar</p>
             </div>
         </div>
+    </div>
     `
 }

@@ -18,7 +18,7 @@ let content = new Vue({
         return{
             initialize:null,
             isRegisterActive:false,
-            isLoginActive:true
+            isLoginActive:false
         }
     },
 
@@ -90,6 +90,12 @@ let content = new Vue({
             }).catch(function(error){
                 console.log(error);
             });
+        },
+        handleLogin(){
+            this.isLoginActive = !this.isLoginActive;
+        },
+        handleRegister(){
+            this.isRegisterActive = !this.isRegisterActive;
         },
         loginSocialNetworks(dataUser){
             let services = this.initialize.use_mode == "testing" ?
