@@ -94,3 +94,21 @@ const createQuestion = (title,text,cancelButtonIsActive = true,okCallBack = () =
     })
 
 }
+const getMobileOperatingSystem = () =>{
+    let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    
+    if (/windows phone/i.test(userAgent)) {
+        return "windows";
+    }
+
+    if (/android/i.test(userAgent)) {
+        return "android";
+    }
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "ios";
+    }
+
+    return "unknown";
+}

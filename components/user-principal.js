@@ -3,7 +3,7 @@ let userPrincipal = {
         isActive:false
     },
     template:`
-        <div v-if="isActive>
+        <div v-if="isActive">
         </div>
     `
 }

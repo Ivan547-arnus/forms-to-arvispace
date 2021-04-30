@@ -90,6 +90,44 @@ let content = new Vue({
             }).catch(function(error){
                 console.log(error);
             });
+        },
+        loginSocialNetworks(dataUser){
+            let services = this.initialize.use_mode == "testing" ?
+                "https://arvispace.com/serviciosASARAmbientePruebas/validarCorreoLogin.php" : 
+                "https://arvispace.com/serviciosASAR/validarCorreoLogin.php";
+            
+            let form = new FormData();
+            form.append('correo', dataUser.correo);
+            form.append('displayName', dataUser.nombreCompleto);
+            axios.post(services,form).then((response) => {
+                if(response.status==200){
+                    let user = response.data[0];
+                    console.log(response.data)
+                    content.startSession(user);
+                }else{
+                    console.log("Error al obtener los datos")
+                }
+            }).catch((error)=>{
+                console.log(error);
+            });
+        },
+        requestFacebook(){
+            let provider = new firebase.auth.FacebookAuthProvider();
+            this.loadLogin = true
+            firebase.auth().signInWithRedirect(provider);
+        },
+        requestGoogle(){
+            var provider = new firebase.auth.GoogleAuthProvider();
+            this.loadLogin = true
+            provider.addScope("https://www.googleapis.com/auth/userinfo.profile");
+            firebase.auth().signInWithRedirect(provider);
+        },
+        requestApple(){
+            var provider = new firebase.auth.OAuthProvider('apple.com');
+            this.loadLogin = true
+            provider.addScope('email');
+            provider.addScope('name');
+            firebase.auth().signInWithRedirect(provider);
         }
     },
     watch:{

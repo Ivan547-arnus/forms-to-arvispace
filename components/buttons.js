@@ -28,7 +28,7 @@ let primaryButtonBlock = {
         }
     },
     template:`
-        <button :type="field.typeButton" class="btn btn-primary btn-block" @click="clicked" :disabled="field.disabled">
+        <button :type="field.typeButton" class="btn ios-btn-primary" @click="clicked" :disabled="field.disabled">
             <span v-html="field.content"></span>
         </button>
     `    
