@@ -59,6 +59,67 @@ let arAnim = {
     },
     template:`
         <div class="anim__container">
+        <div class="background">
+        <svg width="100vw" height="100vh" viewBox="0 0 375 667" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<rect width="375" height="667" fill="white"/>
+<g filter="url(#filter0_d)">
+<path d="M99.2746 145.464C104.275 181.894 98.1484 221.334 111.798 254.434C122.609 280.709 143.872 298.065 162.792 316.656C183.919 337.451 202.659 363.189 201.128 397.9C200.362 415.417 194.641 432.45 195.316 450.021C196.578 481.884 219.147 507.783 244.103 519.228C269.06 530.673 296.449 530.996 323.117 533.521C351.227 536.154 375.494 539.96 375.494 539.96V601.261V633.774V666.964H326.724H289.47H230.201C230.201 666.964 197.848 666.05 179.739 666.964C161.179 667.931 129.276 666.964 129.276 666.964H75.0874H27.6727H-0.776184L-0.0987968 506.092V231.087V109.163V48.2014C-0.0987968 48.2014 -2.62342 19.6216 18.2787 27.8964C36.2077 34.9891 54.4971 52.0762 67.1555 68.3572C83.7331 89.6891 95.3104 116.663 99.2746 145.464Z" fill="url(#paint0_linear)"/>
+</g>
+<g filter="url(#filter1_d)">
+<path d="M374.424 666.057C288.526 666.057 202.671 666.057 116.773 666.057C100.409 666.057 84.0456 666.057 67.639 666.057C53.4229 666.057 34.8261 669.683 21.1253 664.991C17.0881 663.605 13.3516 659.339 13.3086 654.114C13.2657 650.488 14.9407 647.236 16.6157 644.304C39.9799 603.249 76.1859 574.831 115.141 561.022C147.954 549.398 186.092 545.239 207.653 512.396C219.936 493.681 224.145 468.995 228.011 445.322C231.532 423.729 235.011 402.188 238.533 380.595C243 353.189 247.509 325.517 256.743 300.032C277.745 242.182 323.873 199.581 374.553 191.317C376.743 305.31 374.424 419.836 374.424 533.936C374.424 541.241 374.424 666.057 374.424 666.057Z" fill="url(#paint1_linear)"/>
+</g>
+<g filter="url(#filter2_d)">
+<path d="M61.9543 360.178C67.0137 364.467 71.3024 369.626 74.6195 375.792C82.0578 389.764 85.2409 405.913 94.8571 418.746C108.494 436.906 130.977 445.283 150.812 454.698C171.619 464.582 193.264 477.817 201.004 499.495C205.058 510.82 204.79 523.218 208.141 534.777C213.502 553.206 228.546 568.518 246.873 574.214C265.168 579.876 286.913 576.928 301.656 589.124C311.707 597.433 315.795 610.769 319.079 623.4C322.831 637.808 325.88 667.394 325.88 667.394H284.093C284.093 667.394 255.749 667.394 237.587 667.394C189.909 667.394 115.499 667.394 115.499 667.394H93.9387H-0.776184L0.673571 463.427V386.381V367.535C0.673571 367.535 -0.298101 352.739 0.673571 348.886C5.39791 330.29 30.5927 344.497 42.1858 348.886C49.5236 351.634 56.2247 355.353 61.9543 360.178Z" fill="url(#paint2_linear)"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d" x="-15.7762" y="11.3929" width="406.27" height="671.001" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="7.5"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<filter id="filter1_d" x="-8.6922" y="169.317" width="406.186" height="520.077" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="11"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<filter id="filter2_d" x="-20.7762" y="321.557" width="370.657" height="371.837" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset dx="2" dy="4"/>
+<feGaussianBlur stdDeviation="11"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<linearGradient id="paint0_linear" x1="202.458" y1="175.197" x2="-128.17" y2="822.872" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F5FAFF"/>
+<stop offset="1" stop-color="#758599"/>
+</linearGradient>
+<linearGradient id="paint1_linear" x1="151.062" y1="369.002" x2="541.702" y2="697.506" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F5FAFF"/>
+<stop offset="1" stop-color="#6E8199"/>
+</linearGradient>
+<linearGradient id="paint2_linear" x1="208.309" y1="449.259" x2="17.2945" y2="700.936" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F5FAFF"/>
+<stop offset="1" stop-color="#758599"/>
+</linearGradient>
+<clipPath id="clip0">
+<rect width="375" height="667" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+        </div>
           <div class=logo>
               <img class=logo-img src="../images/logo.png" alt="">
           </div>
