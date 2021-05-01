@@ -247,19 +247,23 @@ let register = {
         }
     },
     template:`
-    <div id="register">
-        <div class="container-fluid" v-show="isActive">
-            <div class="container">
-                <component-form
-                    :schema="formSchema"
-                    :data="formDefaultData"
-                    :buttons="buttons"
-                    @on-submit="onSubmit"
-                ></component-form>  
-                <p>¿Ya tienes cuenta? <a href="#" @click="setActiveLogin">Inicia sesión aqui</a></p>
-                <p class="cancel" @click="hideRegister">Cancelar</p>
+    
+        <div id="register">
+        <transition name="slide">
+            <div class="container-fluid" v-show="isActive">
+                <div class="container">
+                    <component-form
+                        :schema="formSchema"
+                        :data="formDefaultData"
+                        :buttons="buttons"
+                        @on-submit="onSubmit"
+                    ></component-form>  
+                    <p>¿Ya tienes cuenta? <a href="#" @click="setActiveLogin">Inicia sesión aqui</a></p>
+                    <p class="cancel" @click="hideRegister">Cancelar</p>
+                </div>
             </div>
+            </transition>
         </div>
-    </div>
+    
     `
 }

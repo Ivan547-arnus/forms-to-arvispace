@@ -115,9 +115,9 @@ let login = {
         }
     },
     template:`
-    
+    <transition name="slide">
         <div class="container-fluid" v-show="isActive">
-        <transition name="fade">
+          
                 <div class="container">
                     <component-form
                         :schema="formSchema"
@@ -128,7 +128,7 @@ let login = {
                     <p>¿No tienes cuenta? <a href="#" @click="setActiveRegister">Registrate aqui</a></p>
                     <p class="cancel" @click="hideLogin">Cancelar</p>
                 </div>
-                </transition>
         </div>
+    </transition>
     `
 }
